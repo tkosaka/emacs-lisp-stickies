@@ -153,7 +153,7 @@
   "Regular expression that matches to buffer names of sticky.")
 
 (defvar stickies-file-name-regexp
-  (format "%s\\(\\|<[0-9]+>\\)" stickies-file-name-prefix)
+  (format "%s\\([0-9]+\\|\\)$" stickies-file-name-prefix)
   "Regular expression that matches to file names fo sticky.")
 
 (defvar stickies-open-stickies-hook nil
@@ -255,15 +255,17 @@
     
     (switch-to-buffer-other-frame buffer-name)
 
+    (switch-to-buffer buffer-name)
+
     (if file-path
-        (insert-file-contents file-path nil nil nil t)
-      (when content
-        (erase-buffer)
-        (insert buffer-content)))
+        (insert-file-contents file-path nil nil nil t))
+    (when content
+      (erase-buffer)
+      (insert content)))
 
     (run-hooks 'stickies-open-stickies-hook)
     (modify-frame-parameters (selected-frame) stickies-frame-alist)
-    (stickies-set-frame-position (current-buffer) (selected-frame))))
+    (stickies-set-frame-position (current-buffer) (selected-frame)))
 
 (defun stickies-open-all-saved-stickies ()
   "Open all save stickies files."

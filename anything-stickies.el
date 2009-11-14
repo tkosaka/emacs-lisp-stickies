@@ -32,6 +32,8 @@
 ;;
 ;; (require 'anything-stickies)
 ;;
+;; 3 Add `anything-c-source-stickies' to `anything-sources'.
+;; 
 ;; Then you can access stickies by anything. Enjoy!
 
 ;;; Code:
